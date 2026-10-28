@@ -1,0 +1,20 @@
+# Benchmark canonical bag (Hesai QT64 as sensor_msgs/PointCloud2: x y z intensity,
+# ring, float32 time [s] relative to the header stamp, uint32 t [ns]; IMU in the
+# lidar frame). BIEVR-LIO's own ncd.yaml (Ouster, Newer College, handheld) with
+# only the sensor description changed: topics, identity extrinsic, 0.5-60 m.
+# BIEVR-LIO reads the uint32 `t` (ns) first. Mounted into the container by the
+# run script (SENSOR_CONFIG=canonical, the default on this branch).
+
+topics:
+  pointcloud: "/lidar/pointcloud"
+  imu: "/lidar/imu"
+
+calibration: # T_IMU_LIDAR (LiDAR -> IMU)
+  translation: [0, 0, 0]
+  rotation: [1, 0, 0,
+             0, 1, 0,
+             0, 0, 1]
+
+lidar:
+  min_range_m: 0.5 # Exclude points closer than this range [m]
+  max_range_m: 60  # Exclude points farther than this range [m]

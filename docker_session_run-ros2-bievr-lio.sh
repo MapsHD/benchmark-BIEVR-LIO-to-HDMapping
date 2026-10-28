@@ -27,12 +27,13 @@ CLOUD_TOPIC=${CLOUD_TOPIC:-/bievr_lio/points/registered}
 
 # Sensor config: selects the LiDAR/IMU topics BIEVR-LIO subscribes to, the
 # LiDAR->IMU extrinsic and the usable LiDAR range.
-# This branch (Bunker-DVI-Dataset-reg-1) defaults to the repo-local
-# config/bunker.yaml (Livox Mid-360 as PointCloud2 on /livox/pointcloud).
+# This branch (hdmapping-benchmark-canonical) defaults to the repo-local
+# config/canonical.yaml (the benchmark's canonical bag: /lidar/pointcloud,
+# /lidar/imu).
 # Wrapper configs in this repo's config/ directory take precedence; any other
 # name falls back to the upstream package configs (enwide, ncd, gamma, mars,
 # grandtour).
-SENSOR_CONFIG=${SENSOR_CONFIG:-bunker}
+SENSOR_CONFIG=${SENSOR_CONFIG:-canonical}
 
 # Resolve the config: a file in this repo's config/ dir is mounted into the
 # container and passed as an absolute path (the BIEVR-LIO launch uses absolute
@@ -64,7 +65,7 @@ usage() {
   echo "If no arguments are provided, a GUI file selector will be used."
   echo
   echo "Environment variables:"
-  echo "  SENSOR_CONFIG - BIEVR-LIO sensor config name (default: bunker, from this repo's config/)"
+  echo "  SENSOR_CONFIG - BIEVR-LIO sensor config name (default: canonical, from this repo's config/)"
   echo "                  upstream-shipped: enwide, ncd, gamma, mars, grandtour"
   echo "  ODOM_TOPIC    - recorded odometry topic (default: /bievr_lio/odom)"
   echo "  CLOUD_TOPIC   - recorded cloud topic    (default: /bievr_lio/points/registered)"
